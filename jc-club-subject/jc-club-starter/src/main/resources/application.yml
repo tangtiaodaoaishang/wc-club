@@ -1,0 +1,70 @@
+server:
+  port: 3010
+spring:
+  datasource:
+    username: root
+    password: Qkt0PxE7gZKtsxxfz1l1TuYGx1VdeiDVvGnweazy9/7TAh4O2jWFUOxTtK9rA31FppQxZ4qOvkObup8uldYxcA==
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.119.134:3306/jc-club?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 20
+      min-idle: 20
+      connectionProperties: config.decrypt=true;config.decrypt.key=${publicKey};
+      max-active: 100
+      max-wait: 60000
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: 123456
+      filter:
+        stat:
+          enabled: true
+          slow-sql-millis: 2000
+          log-slow-sql: true
+        wall:
+          enabled: true
+        config:
+          enabled: true
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 192.168.119.134
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 210210
+    # 连接超时时间
+    timeout: 2s
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIp9Qr9Gr5jYchMVVCJXZUAdad1/fl0S3I6jTQSAAsmg62lCP7kVcLoy/FMmsCONS6Ez5uelScm2yFrz2x8nOEUCAwEAAQ==
+logging:
+  config: classpath:log4j2-spring.xml
+#es:
+#  cluster:
+#    esConfigs[0]:
+#      name: 73438a827b55
+#      nodes: 192.168.119.134:9200
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    accessToken: default_token
+    executor:
+      appname: jc-club-subjcet
+      address:
+      ip: 127.0.0.1
+      port: 9999
+      logpath: /data/applogs/xxl-job/jobhandler
+      logretentiondays: 30
